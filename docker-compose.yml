@@ -36,6 +36,7 @@ acmeair-mainservice-java:
   build: ../acmeair-mainservice-java/
   environment:
     - LICENSE=accept
+    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
 
 acmeair-authservice-java:
   container_name: acmeair-authservice-java
@@ -44,6 +45,7 @@ acmeair-authservice-java:
   build: ../acmeair-authservice-java/
   environment:
     - LICENSE=accept
+    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
 
 acmeair-bookingservice-java:
   container_name: acmeair-bookingservice-java
@@ -53,6 +55,7 @@ acmeair-bookingservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-booking-db
+    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-booking-db
 
@@ -64,6 +67,7 @@ acmeair-customerservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-customer-db
+    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-customer-db
 
@@ -75,5 +79,6 @@ acmeair-flightservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-flight-db
+    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-flight-db

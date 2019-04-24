@@ -1,6 +1,5 @@
-FROM websphere-liberty:microProfile2
+FROM ubuntu:16.04  
 
-USER root
 RUN apt-get update \
   && apt-get install -qq -y --no-install-recommends \
     software-properties-common \
@@ -44,7 +43,7 @@ RUN apt-get update \
     curl \
     libssl-dev \
     libtool \
-    build-essential \
+    build-essential \ 
     autoconf \
     pkg-config \
  && rm -rf /var/lib/apt/lists/*
@@ -61,6 +60,10 @@ RUN ln -sf /usr/bin/g++ /usr/bin/c++ \
  && ln -sf /usr/bin/gcc /usr/bin/cc \
  && ln -sf /usr/bin/gcc-7 /usr/bin/gcc
 
+ENV JAVA_HOME=/opt/ibm/java
+COPY sdk /opt/ibm/sdk
+RUN mv /opt/ibm/sdk /opt/ibm/java
+
 # Install protobuf 3.5.1
 WORKDIR /
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.5.1/protobuf-cpp-3.5.1.tar.gz \
@@ -69,11 +72,7 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.5.1/pr
  && ./configure && make && make install && ldconfig \
  && rm -rf /protobuf-3.5.1 && rm -rf /protobuf-cpp-3.5.1.tar.gz
 
-COPY sdk /opt/ibm/sdk
+#ENTRYPOINT ["/opt/ibm/java/jre/bin/java", "-XX:JITaaSServer", "-Xjit:verbose={jitaas},statisticsFrequency=500,vlog=/opt/ibm/java/vlog.txt"]
+ENTRYPOINT ["/opt/ibm/java/jre/bin/java", "-XX:JITaaSServer", "-Xjit:verbose={jitaas}"] 
 
-RUN rm -rf /opt/ibm/java
-
-RUN mv /opt/ibm/sdk /opt/ibm/java
-
-ENV JAVA_HOME="/opt/ibm/java"
-ENV JVM_ARGS="-XX:JITaaSClient:server=jitaas_server,port=38400 -XX:+UseContainerSupport -Xjit:sampleThreshold=0"
+EXPOSE 38400
