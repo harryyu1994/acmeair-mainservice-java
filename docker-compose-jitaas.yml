@@ -29,8 +29,8 @@ acmeair-nginx1:
     - acmeair-customerservice-java
     - acmeair-flightservice-java
   mem_limit: 100m
-  cpuset: "0"
-  cpu_quota: 50000
+  cpuset: "0,3"
+  cpu_quota: 150000
 
 acmeair-mainservice-java:
   container_name: acmeair-mainservice-java
@@ -39,7 +39,6 @@ acmeair-mainservice-java:
   build: ../acmeair-mainservice-java/
   environment:
     - LICENSE=accept
-    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   mem_limit: 150m
   memswap_limit: 150m
   cpuset: "0"
@@ -52,7 +51,6 @@ acmeair-authservice-java:
   build: ../acmeair-authservice-java/
   environment:
     - LICENSE=accept
-    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   mem_limit: 150m
   memswap_limit: 150m
   cpuset: "1"
@@ -66,7 +64,6 @@ acmeair-bookingservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-booking-db
-    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-booking-db
   mem_limit: 150m
@@ -82,7 +79,6 @@ acmeair-customerservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-customer-db
-    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-customer-db
   mem_limit: 150m
@@ -98,7 +94,6 @@ acmeair-flightservice-java:
   environment:
     - LICENSE=accept
     - MONGO_HOST=acmeair-flight-db
-    - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-flight-db
   mem_limit: 150m

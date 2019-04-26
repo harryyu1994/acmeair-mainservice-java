@@ -76,4 +76,4 @@ RUN rm -rf /opt/ibm/java
 RUN mv /opt/ibm/sdk /opt/ibm/java
 
 ENV JAVA_HOME="/opt/ibm/java"
-ENV JVM_ARGS="-XX:JITaaSClient:server=jitaas_server,port=38400 -XX:+UseContainerSupport -Xjit:sampleThreshold=0"
+ENV JVM_ARGS="-XX:JITaaSClient:server=jitaas_server_microservice,port=38400 -Xjit:dontDowngradeToCold,sampleThreshold=0,scorchingSampleThreshold=0 -XX:+UseContainerSupport"
