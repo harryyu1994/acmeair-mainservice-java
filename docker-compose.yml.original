@@ -28,9 +28,6 @@ acmeair-nginx1:
     - acmeair-bookingservice-java
     - acmeair-customerservice-java
     - acmeair-flightservice-java
-  mem_limit: 100m
-  cpuset: "0,3"
-  cpu_quota: 150000
 
 acmeair-mainservice-java:
   container_name: acmeair-mainservice-java
@@ -40,10 +37,6 @@ acmeair-mainservice-java:
   environment:
     - LICENSE=accept
     - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
-  mem_limit: 150m
-  memswap_limit: 150m
-  cpuset: "0"
-  cpu_quota: 50000
 
 acmeair-authservice-java:
   container_name: acmeair-authservice-java
@@ -53,10 +46,6 @@ acmeair-authservice-java:
   environment:
     - LICENSE=accept
     - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
-  mem_limit: 150m
-  memswap_limit: 150m
-  cpuset: "1"
-  cpu_quota: 50000
 
 acmeair-bookingservice-java:
   container_name: acmeair-bookingservice-java
@@ -69,10 +58,6 @@ acmeair-bookingservice-java:
     - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-booking-db
-  mem_limit: 150m
-  memswap_limit: 150m
-  cpuset: "1"
-  cpu_quota: 50000
 
 acmeair-customerservice-java:
   container_name: acmeair-customerservice-java
@@ -85,10 +70,6 @@ acmeair-customerservice-java:
     - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-customer-db
-  mem_limit: 150m
-  memswap_limit: 150m
-  cpuset: "2"
-  cpu_quota: 50000
 
 acmeair-flightservice-java:
   container_name: acmeair-flightservice-java
@@ -101,8 +82,3 @@ acmeair-flightservice-java:
     - JVM_ARGS="-XX:+UseContainerSupport -Xjit:sampleThreshold=0"
   volumes_from:
     - acmeair-flight-db
-  mem_limit: 150m
-  memswap_limit: 150m
-  cpuset: "2"
-  cpu_quota: 50000
- 
